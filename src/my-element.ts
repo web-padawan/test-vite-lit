@@ -1,7 +1,5 @@
-import { LitElement, html } from 'lit'
-import { customElement } from 'lit/decorators.js'
-import '@vaadin/side-nav/vaadin-side-nav.js';
-import '@vaadin/side-nav/vaadin-side-nav-item.js';
+import { LitElement, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 
 /**
  * An example element.
@@ -10,15 +8,21 @@ import '@vaadin/side-nav/vaadin-side-nav-item.js';
 export class MyElement extends LitElement {
   render() {
     return html`
-      <vaadin-side-nav>
-        <vaadin-side-nav-item>Item content</vaadin-side-nav-item>
-      </vaadin-side-nav>
-    `
+      <vaadin-button>Button</vaadin-button>
+      <vaadin-menu-bar></vaadin-menu-bar>
+    `;
+  }
+
+  async firstUpdated() {
+    await Promise.all([
+      import('@vaadin/menu-bar/vaadin-menu-bar.js'),
+      import('@vaadin/button/vaadin-button.js'),
+    ]);
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'my-element': MyElement
+    'my-element': MyElement;
   }
 }
